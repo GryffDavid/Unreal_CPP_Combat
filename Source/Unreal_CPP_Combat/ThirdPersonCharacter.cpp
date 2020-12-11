@@ -16,7 +16,7 @@ AThirdPersonCharacter::AThirdPersonCharacter()
 
 	CameraSpringArmComponent = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraSpringArm"));
 	CameraSpringArmComponent->SetupAttachment(RootComponent);
-	CameraSpringArmComponent->TargetArmLength = 300;
+	CameraSpringArmComponent->TargetArmLength = DefaultCameraDistance;
 	CameraSpringArmComponent->bUsePawnControlRotation = true;
 
 	ThirdPersonCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("ThirdPersonCamera"));
@@ -28,6 +28,8 @@ AThirdPersonCharacter::AThirdPersonCharacter()
 void AThirdPersonCharacter::BeginPlay()
 {
 	Super::BeginPlay();	
+
+	CameraSpringArmComponent->TargetArmLength = DefaultCameraDistance;
 }
 
 // Called every frame
@@ -37,8 +39,17 @@ void AThirdPersonCharacter::Tick(float DeltaTime)
 
 
 	//TODO: Should maybe do this camera transition with a timeline in blueprint
-	CurrentSpringLength = FMath::Lerp(CurrentSpringLength, DesiredSpringLength, 0.1f);
+	CurrentSpringLength = FMath::Lerp(CurrentSpringLength, DesiredSpringLength, 0.05f);
 	CameraSpringArmComponent->TargetArmLength = CurrentSpringLength;
+
+	if (!GetCharacterMovement()->Velocity.IsZero() || AimPressed)
+	{
+		bUseControllerRotationYaw = true;
+	}
+	else
+	{
+		bUseControllerRotationYaw = false;
+	}
 }
 
 // Called to bind functionality to input
@@ -119,14 +130,11 @@ void AThirdPersonCharacter::Aim()
 {
 	AimPressed = true;
 
-	if (SprintPressed == true)
-	{
-		GetCharacterMovement()->MaxWalkSpeed = 200;
-	}
+	if (SprintPressed == true)	
+		GetCharacterMovement()->MaxWalkSpeed = 200;	
 
-	DesiredSpringLength = 100;
-	ThirdPersonCamera->AddLocalOffset(FVector(0, 50, 0));
-	bUseControllerRotationYaw = true;
+	DesiredSpringLength = AimingCameraDistance;
+	ThirdPersonCamera->AddLocalOffset(FVector(0, YShoulderOffset, 0));
 	
 }
 
@@ -134,14 +142,11 @@ void AThirdPersonCharacter::StopAiming()
 {
 	AimPressed = false;
 
-	if (SprintPressed == true)
-	{
-		GetCharacterMovement()->MaxWalkSpeed = 375;
-	}
+	if (SprintPressed == true)	
+		GetCharacterMovement()->MaxWalkSpeed = 375;	
 
-	DesiredSpringLength = 300;
-	ThirdPersonCamera->AddLocalOffset(FVector(0, -50, 0));
-	bUseControllerRotationYaw = false;
+	DesiredSpringLength = DefaultCameraDistance;
+	ThirdPersonCamera->AddLocalOffset(FVector(0, -YShoulderOffset, 0));
 }
 
 

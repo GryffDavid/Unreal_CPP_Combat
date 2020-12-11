@@ -64,11 +64,20 @@ public:
 	bool DisableMovement;
 
 	UPROPERTY(BlueprintReadWrite, Category = Shooting)
-	bool AimPressed;
+	bool AimPressed;	
+
+	UPROPERTY(EditDefaultsOnly, Category = Camera)
+	float DefaultCameraDistance = 300.0f;
+
+	UPROPERTY(EditDefaultsOnly, Category = Camera)
+	float AimingCameraDistance = 100.0f;
+
+	UPROPERTY(EditDefaultsOnly, Category = Camera)
+	float YShoulderOffset = 50.0f;
 
 	UPROPERTY(BlueprintReadWrite, Category = Camera)
-	float CurrentSpringLength = 300;
+	float DesiredSpringLength = DefaultCameraDistance;
 
-	UPROPERTY(BlueprintReadWrite, Category = Camera)
-	float DesiredSpringLength = 300;
+private:
+	float CurrentSpringLength = DefaultCameraDistance;
 };
