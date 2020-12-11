@@ -7,6 +7,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
+#include "Math/UnrealMathUtility.h"
 #include "ThirdPersonCharacter.generated.h"
 
 UCLASS()
@@ -28,7 +29,6 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
 
 	UFUNCTION()
 	void MoveForward(float value);
@@ -65,4 +65,10 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, Category = Shooting)
 	bool AimPressed;
+
+	UPROPERTY(BlueprintReadWrite, Category = Camera)
+	float CurrentSpringLength = 300;
+
+	UPROPERTY(BlueprintReadWrite, Category = Camera)
+	float DesiredSpringLength = 300;
 };

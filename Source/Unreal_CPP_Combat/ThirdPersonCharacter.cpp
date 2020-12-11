@@ -27,14 +27,18 @@ AThirdPersonCharacter::AThirdPersonCharacter()
 // Called when the game starts or when spawned
 void AThirdPersonCharacter::BeginPlay()
 {
-	Super::BeginPlay();
-	
+	Super::BeginPlay();	
 }
 
 // Called every frame
 void AThirdPersonCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+
+	//TODO: Should maybe do this camera transition with a timeline in blueprint
+	CurrentSpringLength = FMath::Lerp(CurrentSpringLength, DesiredSpringLength, 0.1f);
+	CameraSpringArmComponent->TargetArmLength = CurrentSpringLength;
 }
 
 // Called to bind functionality to input
@@ -63,8 +67,8 @@ void AThirdPersonCharacter::MoveForward(float value)
 {
 	if (!DisableMovement)
 	{
-		FVector Direction = FRotationMatrix(FRotator(0, Controller->GetControlRotation().Yaw, 0)).GetUnitAxis(EAxis::X);
-		AddMovementInput(Direction, value);
+		FVector Direction = FRotationMatrix(FRotator(0, Controller->GetControlRotation().Yaw, 0)).GetScaledAxis(EAxis::X);
+		AddMovementInput(Direction, value);		
 	}
 }
 
@@ -72,7 +76,7 @@ void AThirdPersonCharacter::MoveRight(float value)
 {
 	if (!DisableMovement)
 	{
-		FVector Direction = FRotationMatrix(FRotator(0, Controller->GetControlRotation().Yaw, 0)).GetUnitAxis(EAxis::Y);
+		FVector Direction = FRotationMatrix(FRotator(0, Controller->GetControlRotation().Yaw, 0)).GetScaledAxis(EAxis::Y);
 		AddMovementInput(Direction, value);
 	}
 }
@@ -114,11 +118,30 @@ void AThirdPersonCharacter::StopSprinting()
 void AThirdPersonCharacter::Aim()
 {
 	AimPressed = true;
+
+	if (SprintPressed == true)
+	{
+		GetCharacterMovement()->MaxWalkSpeed = 200;
+	}
+
+	DesiredSpringLength = 100;
+	ThirdPersonCamera->AddLocalOffset(FVector(0, 50, 0));
+	bUseControllerRotationYaw = true;
+	
 }
 
 void AThirdPersonCharacter::StopAiming()
 {
 	AimPressed = false;
+
+	if (SprintPressed == true)
+	{
+		GetCharacterMovement()->MaxWalkSpeed = 375;
+	}
+
+	DesiredSpringLength = 300;
+	ThirdPersonCamera->AddLocalOffset(FVector(0, -50, 0));
+	bUseControllerRotationYaw = false;
 }
 
 
