@@ -78,6 +78,12 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category = Camera)
 	float DesiredSpringLength = DefaultCameraDistance;
 
+	UPROPERTY(EditDefaultsOnly, Category = Movement)
+	float RunSpeed = 350.0f;
+
+	UPROPERTY(EditDefaultsOnly, Category = Movement)
+	float SprintSpeed = 600.0f;
+
 private:
 	float CurrentSpringLength = DefaultCameraDistance;
 };

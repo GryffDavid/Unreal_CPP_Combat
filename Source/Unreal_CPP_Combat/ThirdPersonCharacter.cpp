@@ -9,7 +9,7 @@ AThirdPersonCharacter::AThirdPersonCharacter()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	GetCharacterMovement()->MaxWalkSpeed = 200;
+	GetCharacterMovement()->MaxWalkSpeed = RunSpeed;
 	GetCharacterMovement()->MaxWalkSpeedCrouched = 160;
 	GetCharacterMovement()->JumpZVelocity = 365;
 	GetCharacterMovement()->AirControl = 0.5f;
@@ -85,7 +85,7 @@ void AThirdPersonCharacter::MoveForward(float value)
 
 void AThirdPersonCharacter::MoveRight(float value)
 {
-	if (!DisableMovement)
+	if (!DisableMovement && SprintPressed == false)
 	{
 		FVector Direction = FRotationMatrix(FRotator(0, Controller->GetControlRotation().Yaw, 0)).GetScaledAxis(EAxis::Y);
 		AddMovementInput(Direction, value);
@@ -117,13 +117,13 @@ void AThirdPersonCharacter::Sprint()
 	SprintPressed = true;
 
 	if (AimPressed == false)
-		GetCharacterMovement()->MaxWalkSpeed = 375;
+		GetCharacterMovement()->MaxWalkSpeed = SprintSpeed;
 }
 
 void AThirdPersonCharacter::StopSprinting()
 {
 	SprintPressed = false;
-	GetCharacterMovement()->MaxWalkSpeed = 200;
+	GetCharacterMovement()->MaxWalkSpeed = RunSpeed;
 }
 
 void AThirdPersonCharacter::Aim()
@@ -131,7 +131,7 @@ void AThirdPersonCharacter::Aim()
 	AimPressed = true;
 
 	if (SprintPressed == true)	
-		GetCharacterMovement()->MaxWalkSpeed = 200;	
+		GetCharacterMovement()->MaxWalkSpeed = RunSpeed;
 
 	DesiredSpringLength = AimingCameraDistance;
 	ThirdPersonCamera->AddLocalOffset(FVector(0, YShoulderOffset, 0));
@@ -143,7 +143,7 @@ void AThirdPersonCharacter::StopAiming()
 	AimPressed = false;
 
 	if (SprintPressed == true)	
-		GetCharacterMovement()->MaxWalkSpeed = 375;	
+		GetCharacterMovement()->MaxWalkSpeed = SprintSpeed;
 
 	DesiredSpringLength = DefaultCameraDistance;
 	ThirdPersonCamera->AddLocalOffset(FVector(0, -YShoulderOffset, 0));
