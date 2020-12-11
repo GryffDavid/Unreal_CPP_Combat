@@ -54,6 +54,9 @@ void AThirdPersonCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 	PlayerInputComponent->BindAction("Sprint", IE_Pressed, this, &AThirdPersonCharacter::Sprint);
 	PlayerInputComponent->BindAction("Sprint", IE_Released, this, &AThirdPersonCharacter::StopSprinting);
 
+	PlayerInputComponent->BindAction("AimDownSights", IE_Pressed, this, &AThirdPersonCharacter::Aim);
+	PlayerInputComponent->BindAction("AimDownSights", IE_Released, this, &AThirdPersonCharacter::StopAiming);
+
 }
 
 void AThirdPersonCharacter::MoveForward(float value)
@@ -95,14 +98,27 @@ void AThirdPersonCharacter::StopJumping()
 
 void AThirdPersonCharacter::Sprint()
 {
-	IsSprinting = true;
-	GetCharacterMovement()->MaxWalkSpeed = 375;
+	//TODO: Clean up IsSprinting and SprintPressed. They're the same thing.
+	SprintPressed = true;
+
+	if (AimPressed == false)
+		GetCharacterMovement()->MaxWalkSpeed = 375;
 }
 
 void AThirdPersonCharacter::StopSprinting()
 {
-	IsSprinting = false;
+	SprintPressed = false;
 	GetCharacterMovement()->MaxWalkSpeed = 200;
+}
+
+void AThirdPersonCharacter::Aim()
+{
+	AimPressed = true;
+}
+
+void AThirdPersonCharacter::StopAiming()
+{
+	AimPressed = false;
 }
 
 

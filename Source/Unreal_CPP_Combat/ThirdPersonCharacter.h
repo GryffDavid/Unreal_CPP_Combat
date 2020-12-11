@@ -42,6 +42,9 @@ public:
 	void Sprint();
 	void StopSprinting();
 
+	void Aim();
+	void StopAiming();
+
 	UPROPERTY(VisibleDefaultsOnly, Category = Camera)
 	USpringArmComponent* CameraSpringArmComponent;
 
@@ -49,7 +52,7 @@ public:
 	UCameraComponent* ThirdPersonCamera;
 
 	UPROPERTY(BlueprintReadWrite, Category = Movement)
-	bool JogPressed;
+	bool SprintPressed;
 
 	UPROPERTY(BlueprintReadWrite, Category = Movement)
 	bool CrouchPressed;
@@ -60,6 +63,6 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category = Movement)
 	bool DisableMovement;
 
-	UPROPERTY(BlueprintReadWrite, Category = Movement)
-	bool IsSprinting;
+	UPROPERTY(BlueprintReadWrite, Category = Shooting)
+	bool AimPressed;
 };
