@@ -42,14 +42,10 @@ void AThirdPersonCharacter::Tick(float DeltaTime)
 	CurrentSpringLength = FMath::Lerp(CurrentSpringLength, DesiredSpringLength, 0.05f);
 	CameraSpringArmComponent->TargetArmLength = CurrentSpringLength;
 
-	if (!GetCharacterMovement()->Velocity.IsZero() || AimPressed)
-	{
-		bUseControllerRotationYaw = true;
-	}
-	else
-	{
+	if (!GetCharacterMovement()->Velocity.IsZero() || AimPressed)	
+		bUseControllerRotationYaw = true;	
+	else	
 		bUseControllerRotationYaw = false;
-	}
 }
 
 // Called to bind functionality to input
@@ -99,7 +95,12 @@ void AThirdPersonCharacter::Jump()
 	GetCharacterMovement()->Velocity.ToDirectionAndLength(OUT Direction, OUT Length);
 
 	if (Length > 0.0f)
-		GetCharacterMovement()->JumpZVelocity = 365;
+	{
+		if (SprintPressed == false)
+			GetCharacterMovement()->JumpZVelocity = 365;
+		else
+			GetCharacterMovement()->JumpZVelocity = 450;
+	}
 	else
 		GetCharacterMovement()->JumpZVelocity = 340;
 
@@ -129,9 +130,8 @@ void AThirdPersonCharacter::StopSprinting()
 void AThirdPersonCharacter::Aim()
 {
 	AimPressed = true;
-
-	if (SprintPressed == true)	
-		GetCharacterMovement()->MaxWalkSpeed = RunSpeed;
+	
+	GetCharacterMovement()->MaxWalkSpeed = AimRunSpeed;
 
 	DesiredSpringLength = AimingCameraDistance;
 	ThirdPersonCamera->AddLocalOffset(FVector(0, YShoulderOffset, 0));
@@ -144,6 +144,8 @@ void AThirdPersonCharacter::StopAiming()
 
 	if (SprintPressed == true)	
 		GetCharacterMovement()->MaxWalkSpeed = SprintSpeed;
+	else
+		GetCharacterMovement()->MaxWalkSpeed = RunSpeed;
 
 	DesiredSpringLength = DefaultCameraDistance;
 	ThirdPersonCamera->AddLocalOffset(FVector(0, -YShoulderOffset, 0));

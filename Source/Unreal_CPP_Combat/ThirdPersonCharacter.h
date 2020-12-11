@@ -84,6 +84,9 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = Movement)
 	float SprintSpeed = 600.0f;
 
+	UPROPERTY(EditDefaultsOnly, Category = Movement)
+	float AimRunSpeed = 200.0f;
+
 private:
 	float CurrentSpringLength = DefaultCameraDistance;
 };
