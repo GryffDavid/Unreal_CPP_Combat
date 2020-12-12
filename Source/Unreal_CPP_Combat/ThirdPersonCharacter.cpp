@@ -36,13 +36,12 @@ void AThirdPersonCharacter::BeginPlay()
 void AThirdPersonCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-
+	
 	//TODO: Should maybe do this camera transition with a timeline in blueprint
-	CurrentSpringLength = FMath::Lerp(CurrentSpringLength, DesiredSpringLength, 0.05f);
+	CurrentSpringLength = FMath::Lerp(CurrentSpringLength, DesiredSpringLength, 0.1f);
 	CameraSpringArmComponent->TargetArmLength = CurrentSpringLength;
 
-	if ( AimPressed)	
+	if (AimPressed)	
 		bUseControllerRotationYaw = true;	
 	else	
 		bUseControllerRotationYaw = false;
@@ -67,8 +66,8 @@ void AThirdPersonCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 
 	PlayerInputComponent->BindAction("AimDownSights", IE_Pressed, this, &AThirdPersonCharacter::Aim);
 	PlayerInputComponent->BindAction("AimDownSights", IE_Released, this, &AThirdPersonCharacter::StopAiming);
-
 }
+
 
 void AThirdPersonCharacter::MoveForward(float value)
 {
@@ -87,6 +86,7 @@ void AThirdPersonCharacter::MoveRight(float value)
 		AddMovementInput(Direction, value);
 	}
 }
+
 
 void AThirdPersonCharacter::Jump()
 { 
@@ -107,14 +107,15 @@ void AThirdPersonCharacter::Jump()
 	Super::Jump();
 }
 
+
 void AThirdPersonCharacter::StopJumping()
 {
 	Super::StopJumping();
 }
 
+
 void AThirdPersonCharacter::Sprint()
 {
-	//TODO: Clean up IsSprinting and SprintPressed. They're the same thing.
 	SprintPressed = true;
 
 	if (AimPressed == false)
@@ -127,6 +128,7 @@ void AThirdPersonCharacter::StopSprinting()
 	GetCharacterMovement()->MaxWalkSpeed = RunSpeed;
 }
 
+
 void AThirdPersonCharacter::Aim()
 {
 	AimPressed = true;
@@ -134,8 +136,7 @@ void AThirdPersonCharacter::Aim()
 	GetCharacterMovement()->MaxWalkSpeed = AimRunSpeed;
 
 	DesiredSpringLength = AimingCameraDistance;
-	ThirdPersonCamera->AddLocalOffset(FVector(0, YShoulderOffset, 0));
-	
+	ThirdPersonCamera->AddLocalOffset(FVector(0, YShoulderOffset, 0));	
 }
 
 void AThirdPersonCharacter::StopAiming()
