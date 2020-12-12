@@ -42,7 +42,7 @@ void AThirdPersonCharacter::Tick(float DeltaTime)
 	CurrentSpringLength = FMath::Lerp(CurrentSpringLength, DesiredSpringLength, 0.05f);
 	CameraSpringArmComponent->TargetArmLength = CurrentSpringLength;
 
-	if (!GetCharacterMovement()->Velocity.IsZero() || AimPressed)	
+	if ( AimPressed)	
 		bUseControllerRotationYaw = true;	
 	else	
 		bUseControllerRotationYaw = false;
