@@ -19,18 +19,6 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-private:
-	float CurrentSpringLength = DefaultCameraDistance;
-
-	void Jump() override;
-	void StopJumping() override;
-
-	void Sprint();
-	void StopSprinting();
-
-	void Aim();
-	void StopAiming();
-
 public:	
 	// Sets default values for this character's properties
 	AThirdPersonCharacter();
@@ -51,19 +39,19 @@ public:
 	
 
 	//CAMERA PROPERTIES
-	UPROPERTY(VisibleDefaultsOnly, Category = Camera)
+	UPROPERTY(BlueprintReadOnly, Category = Camera)
 	USpringArmComponent* CameraSpringArmComponent;
 
-	UPROPERTY(VisibleDefaultsOnly, Category = Camera)
+	UPROPERTY(BlueprintReadOnly, Category = Camera)
 	UCameraComponent* ThirdPersonCamera;
 
 	UPROPERTY(BlueprintReadWrite, Category = Camera)
 	float DesiredSpringLength = DefaultCameraDistance;
 
-	UPROPERTY(EditDefaultsOnly, Category = Camera)
+	UPROPERTY(BlueprintReadWrite, Category = Camera)
 	float DefaultCameraDistance = 300.0f;
 
-	UPROPERTY(EditDefaultsOnly, Category = Camera)
+	UPROPERTY(BlueprintReadWrite, Category = Camera)
 	float AimingCameraDistance = 100.0f;
 
 	UPROPERTY(EditDefaultsOnly, Category = Camera)
@@ -86,6 +74,9 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category = Shooting)
 	bool AimPressed;
 
+	UPROPERTY(BlueprintReadWrite, Category = Gameplay)
+	bool CharacterActivePaused = false;
+
 
 	//MOVEMENT SPEED PROPERTIES
 	UPROPERTY(EditDefaultsOnly, Category = Movement)
@@ -96,4 +87,18 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, Category = Movement)
 	float SprintSpeed = 600.0f;
+
+private:
+	float CurrentSpringLength = DefaultCameraDistance;
+
+	bool IsSprinting = false;
+
+	void Jump() override;
+	void StopJumping() override;
+
+	void Sprint();
+	void StopSprinting();
+
+	void Aim();
+	void StopAiming();
 };

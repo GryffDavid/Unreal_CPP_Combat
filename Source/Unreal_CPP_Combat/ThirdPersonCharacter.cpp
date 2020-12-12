@@ -17,6 +17,11 @@ AThirdPersonCharacter::AThirdPersonCharacter()
 	CameraSpringArmComponent = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraSpringArm"));
 	CameraSpringArmComponent->SetupAttachment(RootComponent);
 	CameraSpringArmComponent->TargetArmLength = DefaultCameraDistance;
+	CurrentSpringLength = DefaultCameraDistance;
+	DesiredSpringLength = DefaultCameraDistance;
+
+	UE_LOG(LogTemp, Warning, TEXT("DefaultCameraDistance %f"), DefaultCameraDistance);
+
 	CameraSpringArmComponent->bUsePawnControlRotation = true;
 
 	ThirdPersonCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("ThirdPersonCamera"));
@@ -30,6 +35,7 @@ void AThirdPersonCharacter::BeginPlay()
 	Super::BeginPlay();	
 
 	CameraSpringArmComponent->TargetArmLength = DefaultCameraDistance;
+	CurrentSpringLength = DefaultCameraDistance;
 }
 
 // Called every frame
@@ -41,10 +47,7 @@ void AThirdPersonCharacter::Tick(float DeltaTime)
 	CurrentSpringLength = FMath::Lerp(CurrentSpringLength, DesiredSpringLength, 0.1f);
 	CameraSpringArmComponent->TargetArmLength = CurrentSpringLength;
 
-	if (AimPressed)	
-		bUseControllerRotationYaw = true;	
-	else	
-		bUseControllerRotationYaw = false;
+	bUseControllerRotationYaw = (AimPressed && !CharacterActivePaused);
 }
 
 // Called to bind functionality to input
@@ -118,8 +121,8 @@ void AThirdPersonCharacter::Sprint()
 {
 	SprintPressed = true;
 
-	if (AimPressed == false)
-		GetCharacterMovement()->MaxWalkSpeed = SprintSpeed;
+	if (AimPressed == false)	
+		GetCharacterMovement()->MaxWalkSpeed = SprintSpeed;	
 }
 
 void AThirdPersonCharacter::StopSprinting()
@@ -132,24 +135,30 @@ void AThirdPersonCharacter::StopSprinting()
 void AThirdPersonCharacter::Aim()
 {
 	AimPressed = true;
-	
-	GetCharacterMovement()->MaxWalkSpeed = AimRunSpeed;
 
-	DesiredSpringLength = AimingCameraDistance;
-	ThirdPersonCamera->AddLocalOffset(FVector(0, YShoulderOffset, 0));	
+	if (!CharacterActivePaused)
+	{
+		GetCharacterMovement()->MaxWalkSpeed = AimRunSpeed;
+
+		DesiredSpringLength = AimingCameraDistance;
+		ThirdPersonCamera->AddLocalOffset(FVector(0, YShoulderOffset, 0));		
+	}
 }
 
 void AThirdPersonCharacter::StopAiming()
 {
 	AimPressed = false;
 
-	if (SprintPressed == true)	
-		GetCharacterMovement()->MaxWalkSpeed = SprintSpeed;
-	else
-		GetCharacterMovement()->MaxWalkSpeed = RunSpeed;
+	if (!CharacterActivePaused)
+	{
+		if (SprintPressed == true)
+			GetCharacterMovement()->MaxWalkSpeed = SprintSpeed;
+		else
+			GetCharacterMovement()->MaxWalkSpeed = RunSpeed;
 
-	DesiredSpringLength = DefaultCameraDistance;
-	ThirdPersonCamera->AddLocalOffset(FVector(0, -YShoulderOffset, 0));
+		DesiredSpringLength = DefaultCameraDistance;
+		ThirdPersonCamera->AddLocalOffset(FVector(0, -YShoulderOffset, 0));
+	}
 }
 
 
