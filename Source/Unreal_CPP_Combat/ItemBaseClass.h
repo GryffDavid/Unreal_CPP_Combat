@@ -7,7 +7,7 @@
 #include "ItemBaseClass.generated.h"
 
 //Base class for any item that can be in the players' inventory
-UCLASS()
+UCLASS(Blueprintable)
 class UNREAL_CPP_COMBAT_API UItemBaseClass : public UObject
 {
 	GENERATED_BODY()
