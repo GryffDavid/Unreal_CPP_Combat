@@ -6,6 +6,13 @@
 #include "GameFramework/Actor.h"
 #include "DoorBaseClass.generated.h"
 
+UENUM()
+enum class EDoorType : uint8
+{
+	Basic,
+	Security
+};
+
 UCLASS()
 class UNREAL_CPP_COMBAT_API ADoorBaseClass : public AActor
 {
@@ -22,5 +29,11 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = Type)
+	EDoorType DoorType = EDoorType::Basic;
+
+	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = Skill)
+	int SecurityCheck;
 
 };
