@@ -30,6 +30,33 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 
+	//SKILLS
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = Skills)
+	int ComputerUse;
+
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = Skills)
+	int Demolitions;
+
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = Skills)
+	int Stealth;
+
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = Skills)
+	int Awareness;
+
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = Skills)
+	int Persuade;
+
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = Skills)
+	int Repair;
+
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = Skills)
+	int Security;
+
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = Skills)
+	int TreatInjury;
+
+
+
 	//MOVEMENT FUNCTIONS
 	UFUNCTION()
 	void MoveForward(float value);
