@@ -18,7 +18,7 @@ ABlasterBoltProjectile::ABlasterBoltProjectile()
 	{
 		CollisionComponent = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComponent"));
 		CollisionComponent->BodyInstance.SetCollisionProfileName(TEXT("Projectile"));
-		CollisionComponent->OnComponentHit.AddDynamic(this, &ABlasterBoltProjectile::OnHit);
+		//CollisionComponent->OnComponentHit.AddDynamic(this, &ABlasterBoltProjectile::OnHit);
 		CollisionComponent->InitSphereRadius(15.0f);
 		RootComponent = CollisionComponent;
 	}
@@ -74,13 +74,13 @@ void ABlasterBoltProjectile::FireInDirection(const FVector & shootDirection)
 	ProjectileMovementComponent->Velocity = shootDirection * ProjectileMovementComponent->InitialSpeed;
 }
 
-void ABlasterBoltProjectile::OnHit(UPrimitiveComponent * hitComponent, AActor * otherActor, UPrimitiveComponent * otherComponent, FVector normalImpulse, const FHitResult & hit)
-{
-	if (otherActor != this && otherComponent->IsSimulatingPhysics())
-	{
-		otherComponent->AddImpulseAtLocation(ProjectileMovementComponent->Velocity * 100.0f, hit.ImpactPoint);
-	}
-
-	Destroy();
-}
+//void ABlasterBoltProjectile::OnHit(UPrimitiveComponent * hitComponent, AActor * otherActor, UPrimitiveComponent * otherComponent, FVector normalImpulse, const FHitResult & hit)
+//{
+//	if (otherActor != this && otherComponent->IsSimulatingPhysics())
+//	{
+//		//otherComponent->AddImpulseAtLocation(ProjectileMovementComponent->Velocity * 100.0f, hit.ImpactPoint);
+//	}
+//
+//	//Destroy();
+//}
 
