@@ -16,21 +16,36 @@ class UNREAL_CPP_COMBAT_API AThirdPersonCharacter : public ACharacter
 	GENERATED_BODY()
 
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
-	// Sets default values for this character's properties
+public:
 	AThirdPersonCharacter();
 
-	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	#pragma region STATS
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = Skills)
+	int Strength;
 
-	//SKILLS
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = Skills)
+	int Dexterity;
+
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = Skills)
+	int Constitution;
+
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = Skills)
+	int Intelligence;
+
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = Skills)
+	int Wisdom;
+
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = Skills)
+	int Charisma;
+	#pragma endregion
+
+	#pragma region SKILLS
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = Skills)
 	int ComputerUse;
 
@@ -54,18 +69,9 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = Skills)
 	int TreatInjury;
+	#pragma endregion
 
-
-
-	//MOVEMENT FUNCTIONS
-	UFUNCTION()
-	void MoveForward(float value);
-
-	UFUNCTION()
-	void MoveRight(float value);
-	
-
-	//CAMERA PROPERTIES
+	#pragma region CAMERA PROPERTIES
 	UPROPERTY(BlueprintReadOnly, Category = Camera)
 	USpringArmComponent* CameraSpringArmComponent;
 
@@ -83,9 +89,18 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, Category = Camera)
 	float YShoulderOffset = 50.0f;
+	#pragma endregion
 
+	#pragma region MOVEMENT FUNCTIONS
 
-	//MOVEMENT BOOLEANS
+	UFUNCTION()
+	void MoveForward(float value);
+
+	UFUNCTION()
+	void MoveRight(float value);	
+	#pragma endregion
+
+	#pragma region MOVEMENT BOOLEANS
 	UPROPERTY(BlueprintReadWrite, Category = Movement)
 	bool DisableMovement;
 
@@ -100,12 +115,9 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, Category = Shooting)
 	bool AimPressed;
+	#pragma endregion
 
-	UPROPERTY(BlueprintReadWrite, Category = Gameplay)
-	bool CharacterActivePaused = false;
-
-
-	//MOVEMENT SPEED PROPERTIES
+	#pragma region MOVEMENT SPEED PROPERTIES
 	UPROPERTY(EditDefaultsOnly, Category = Movement)
 	float RunSpeed = 350.0f;
 
@@ -114,6 +126,10 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, Category = Movement)
 	float SprintSpeed = 600.0f;
+	#pragma endregion
+
+	UPROPERTY(BlueprintReadWrite, Category = Gameplay)
+	bool CharacterActivePaused = false;
 
 private:
 	float CurrentSpringLength = DefaultCameraDistance;
