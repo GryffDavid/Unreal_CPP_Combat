@@ -8,6 +8,12 @@ AEnemyBaseClass::AEnemyBaseClass()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	//MyCollisionComponent = CreateDefaultSubobject<USphereComponent>(TEXT("ButtSphereComponent"));
+	//MyCollisionComponent->SetupAttachment(RootComponent);
+
+	//MyAttackWidget = CreateDefaultSubobject<UWidgetComponent>(TEXT("BUTTATTACKCOMPONENT"));
+	//MyAttackWidget->SetupAttachment(RootComponent);
 }
 
 // Called when the game starts or when spawned

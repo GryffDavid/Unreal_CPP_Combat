@@ -5,6 +5,8 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Math/UnrealMathUtility.h"
+#include "Components/SphereComponent.h"
+#include "Components/WidgetComponent.h"
 #include "EnemyBaseClass.generated.h"
 
 UCLASS()
@@ -26,6 +28,12 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	//UPROPERTY(VisibleDefaultsOnly, Category = Projectile)
+	//USphereComponent* MyCollisionComponent;
+
+	//UPROPERTY(VisibleDefaultsOnly, Category = Projectile)
+	//UWidgetComponent* MyAttackWidget;
 
 	#pragma region ATTRIBUTES
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = Skills)
@@ -58,4 +66,6 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Combat)
 	int Defense;
+
+
 };
