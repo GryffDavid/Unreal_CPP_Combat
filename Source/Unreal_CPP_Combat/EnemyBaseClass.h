@@ -47,6 +47,15 @@ public:
 	int Charisma;
 	#pragma endregion
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Skills)
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = Combat)
+	int MaxHP;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Combat)
+	int CurrentHP;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Combat)
+	float HPPercent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Combat)
 	int Defense;
 };

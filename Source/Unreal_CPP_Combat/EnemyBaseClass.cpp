@@ -14,6 +14,9 @@ AEnemyBaseClass::AEnemyBaseClass()
 void AEnemyBaseClass::BeginPlay()
 {
 	Super::BeginPlay();
+
+	CurrentHP = MaxHP;
+	HPPercent = CurrentHP / MaxHP;
 	Defense = 10 + FMath::Floor((Dexterity - 10.0f) / 2.0f);
 }
 
