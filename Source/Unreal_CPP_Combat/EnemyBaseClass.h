@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Math/UnrealMathUtility.h"
 #include "EnemyBaseClass.generated.h"
 
 UCLASS()
@@ -26,4 +27,26 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	#pragma region ATTRIBUTES
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = Skills)
+	int Strength;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = Skills)
+	int Dexterity;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = Skills)
+	int Constitution;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = Skills)
+	int Intelligence;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = Skills)
+	int Wisdom;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = Skills)
+	int Charisma;
+	#pragma endregion
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Skills)
+	int Defense;
 };

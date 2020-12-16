@@ -25,7 +25,7 @@ public:
 
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	#pragma region STATS
+	#pragma region ATTRIBUTES
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = Skills)
 	int Strength;
 

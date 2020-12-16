@@ -8,14 +8,13 @@ AEnemyBaseClass::AEnemyBaseClass()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
 }
 
 // Called when the game starts or when spawned
 void AEnemyBaseClass::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	Defense = 10 + FMath::Floor((Dexterity - 10.0f) / 2.0f);
 }
 
 // Called every frame
