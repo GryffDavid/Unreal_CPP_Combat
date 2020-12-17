@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Math/UnrealMathUtility.h"
-#include "Components/SphereComponent.h"
 #include "Components/WidgetComponent.h"
 #include "EnemyBaseClass.generated.h"
 
@@ -28,12 +27,15 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	
+	UFUNCTION(BlueprintCallable, Category = Combat)
+	void DecreaseHP(int change);
 
-	//UPROPERTY(VisibleDefaultsOnly, Category = Projectile)
-	//USphereComponent* MyCollisionComponent;
-
-	//UPROPERTY(VisibleDefaultsOnly, Category = Projectile)
-	//UWidgetComponent* MyAttackWidget;
+	UFUNCTION(BlueprintCallable, Category = Combat)
+	void IncreaseHP(int change);
+	
+	UPROPERTY(BlueprintReadWrite, Category = Combat)
+	bool IsTargeted = false;
 
 	#pragma region ATTRIBUTES
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = Skills)
@@ -55,7 +57,7 @@ public:
 	int Charisma;
 	#pragma endregion
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = Combat)
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Combat)
 	int MaxHP;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Combat)
@@ -66,6 +68,4 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Combat)
 	int Defense;
-
-
 };

@@ -39,6 +39,9 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = Material)
 	UMaterialInstanceDynamic* ProjectileMaterialInstance;
 
+	UPROPERTY(EditAnywhere, Category = Projectile)
+	int DamageDone;
+
 	/*UFUNCTION()
 	void OnHit(UPrimitiveComponent* hitComponent, AActor* otherActor, UPrimitiveComponent* otherComponent, FVector normalImpulse, const FHitResult& hit);*/
 
