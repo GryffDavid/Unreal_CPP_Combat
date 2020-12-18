@@ -73,10 +73,10 @@ public:
 	int Charisma;
 	#pragma endregion
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Combat)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Combat)
 	int MaxHP;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Combat)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Combat)
 	int CurrentHP;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Combat)

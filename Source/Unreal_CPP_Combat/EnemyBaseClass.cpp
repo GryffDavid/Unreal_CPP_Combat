@@ -88,4 +88,6 @@ void AEnemyBaseClass::OnEnemyClicked(UPrimitiveComponent* pComponent, FKey inKey
 
 	if (WidgetComponent)
 		WidgetComponent->ToggleVisibility();
+
+	IsTargeted = true;
 }
