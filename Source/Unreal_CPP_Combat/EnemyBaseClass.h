@@ -42,6 +42,11 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = UserInterface)
 	UWidgetComponent* WidgetComponent;
 
+	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = test)
+	void DeathFunction();
+
+	void DeathFunction_Implementation();
+
 	UFUNCTION()
 	void OnEnemyClicked(UPrimitiveComponent* pComponent, FKey inKey);
 

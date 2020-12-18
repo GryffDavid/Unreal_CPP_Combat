@@ -42,12 +42,19 @@ void AEnemyBaseClass::DecreaseHP(int change)
 {
 	CurrentHP -= change;
 	HPPercent = (float)CurrentHP / (float)MaxHP;
+
+	if (CurrentHP <= 0)
+		DeathFunction();
 }
 
 void AEnemyBaseClass::IncreaseHP(int change)
 {
 	CurrentHP = FMath::Clamp(CurrentHP + change, 0, MaxHP);
 	HPPercent = (float)CurrentHP / (float)MaxHP;
+}
+
+void AEnemyBaseClass::DeathFunction_Implementation()
+{
 }
 
 void AEnemyBaseClass::OnEnemyClicked(UPrimitiveComponent* pComponent, FKey inKey)
