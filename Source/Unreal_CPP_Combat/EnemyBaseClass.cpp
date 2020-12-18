@@ -8,13 +8,13 @@ AEnemyBaseClass::AEnemyBaseClass()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	WidgetComponent = CreateDefaultSubobject<UWidgetComponent>(TEXT("AttackWidgetComponent"));
-	WidgetComponent->SetupAttachment(RootComponent);
-
-	//OnClicked.AddDynamic(this, &AEnemyBaseClass::OnClicked);
-	GetMesh()->OnClicked.AddDynamic(this, &AEnemyBaseClass::OnEnemyClicked);
 	
-	//GetCapsuleComponent()->OnClicked.AddDynamic(this, &AEnemyBaseClass::OnClicked);	
+	GetMesh()->OnClicked.AddDynamic(this, &AEnemyBaseClass::OnEnemyClicked);
+
+	WidgetComponent = CreateDefaultSubobject<UWidgetComponent>(TEXT("AttackWidgetComponent"));
+	
+	WidgetComponent->SetupAttachment(RootComponent);
+	WidgetComponent->RegisterComponent();
 	
 }
 
@@ -22,6 +22,9 @@ AEnemyBaseClass::AEnemyBaseClass()
 void AEnemyBaseClass::BeginPlay()
 {
 	Super::BeginPlay();
+
+	
+	
 
 	//Widget = CreateWidget(GetWorld(), WidgetClass, TEXT("AttackWidget"));
 	//WidgetComponent->SetWidget(Widget);
@@ -80,6 +83,9 @@ void AEnemyBaseClass::IncreaseHP(int change)
 }
 
 void AEnemyBaseClass::OnEnemyClicked(UPrimitiveComponent* pComponent, FKey inKey)
-{
+{	
 	UE_LOG(LogTemp, Log, TEXT("WAS CLICKED"));
+
+	if (WidgetComponent)
+		WidgetComponent->ToggleVisibility();
 }

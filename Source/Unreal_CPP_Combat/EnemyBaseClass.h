@@ -7,7 +7,9 @@
 #include "Math/UnrealMathUtility.h"
 #include "GameFramework/Actor.h"
 #include "Components/WidgetComponent.h"
+#include "Components/SceneComponent.h"
 #include "Blueprint/UserWidget.h"
+
 #include "EnemyBaseClass.generated.h"
 
 UCLASS()
