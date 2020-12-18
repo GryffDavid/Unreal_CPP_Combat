@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Math/UnrealMathUtility.h"
-#include "UObject/NameTypes.h"
+#include "GameFramework/Actor.h"
 #include "Components/WidgetComponent.h"
 #include "Blueprint/UserWidget.h"
 #include "EnemyBaseClass.generated.h"
@@ -38,6 +38,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = UserInterface)
 	UWidgetComponent* WidgetComponent;
+
+	UFUNCTION()
+	void OnEnemyClicked(UPrimitiveComponent* pComponent, FKey inKey);
 
 	UFUNCTION(BlueprintCallable, Category = Combat)
 	void DecreaseHP(int change);

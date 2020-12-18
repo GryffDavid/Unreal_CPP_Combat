@@ -27,6 +27,8 @@ AThirdPersonCharacter::AThirdPersonCharacter()
 	ThirdPersonCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("ThirdPersonCamera"));
 	ThirdPersonCamera->SetupAttachment(CameraSpringArmComponent, USpringArmComponent::SocketName);
 	ThirdPersonCamera->bUsePawnControlRotation = false;
+	
+	//GetMesh()->OnClicked.AddDynamic(&AThirdPersonCharacter::MoveForward);
 }
 
 // Called when the game starts or when spawned
