@@ -38,6 +38,9 @@ void AThirdPersonCharacter::BeginPlay()
 
 	CameraSpringArmComponent->TargetArmLength = DefaultCameraDistance;
 	CurrentSpringLength = DefaultCameraDistance;
+
+	GetController<APlayerController>()->SetInputMode(FInputModeGameAndUI());
+	GetController<APlayerController>()->bShowMouseCursor = true;
 }
 
 // Called every frame

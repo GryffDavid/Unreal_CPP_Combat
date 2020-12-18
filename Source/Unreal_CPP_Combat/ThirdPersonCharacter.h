@@ -9,6 +9,7 @@
 #include "Camera/CameraComponent.h"
 #include "Math/UnrealMathUtility.h"
 #include "DiceRoll.h"
+#include "EnemyBaseClass.h"
 #include "ThirdPersonCharacter.generated.h"
 
 UCLASS()
