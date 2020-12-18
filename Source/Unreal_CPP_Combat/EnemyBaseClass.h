@@ -5,7 +5,9 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Math/UnrealMathUtility.h"
+#include "UObject/NameTypes.h"
 #include "Components/WidgetComponent.h"
+#include "Blueprint/UserWidget.h"
 #include "EnemyBaseClass.generated.h"
 
 UCLASS()
@@ -28,6 +30,15 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	
+	//UPROPERTY(EditAnywhere, Category = UserInterface)
+	//TSubclassOf<class UUserWidget> WidgetClass;
+
+	//UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = UserInterface)
+	//UUserWidget* Widget;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = UserInterface)
+	UWidgetComponent* WidgetComponent;
+
 	UFUNCTION(BlueprintCallable, Category = Combat)
 	void DecreaseHP(int change);
 
