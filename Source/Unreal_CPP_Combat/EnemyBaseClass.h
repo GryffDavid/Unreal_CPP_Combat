@@ -8,6 +8,7 @@
 #include "GameFramework/Actor.h"
 #include "Components/WidgetComponent.h"
 #include "Components/SceneComponent.h"
+#include "Kismet/GameplayStatics.h"
 #include "Blueprint/UserWidget.h"
 
 #include "EnemyBaseClass.generated.h"

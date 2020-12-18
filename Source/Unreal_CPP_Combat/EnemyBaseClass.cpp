@@ -89,5 +89,19 @@ void AEnemyBaseClass::OnEnemyClicked(UPrimitiveComponent* pComponent, FKey inKey
 	if (WidgetComponent)
 		WidgetComponent->ToggleVisibility();
 
+	TArray<AActor*> FoundActors;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AEnemyBaseClass::StaticClass(), FoundActors);
+
+	for (AActor* enemyActor : FoundActors)
+	{
+		AEnemyBaseClass* myEnemy = Cast<AEnemyBaseClass>(enemyActor);
+
+		if (myEnemy != this)
+		{
+			myEnemy->IsTargeted = false;
+			myEnemy->WidgetComponent->SetVisibility(myEnemy->IsTargeted);
+		}
+	}
+
 	IsTargeted = true;
 }

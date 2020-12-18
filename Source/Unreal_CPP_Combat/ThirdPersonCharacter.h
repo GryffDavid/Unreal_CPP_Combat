@@ -8,6 +8,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Math/UnrealMathUtility.h"
+#include "DiceRoll.h"
 #include "ThirdPersonCharacter.generated.h"
 
 UCLASS()
