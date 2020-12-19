@@ -44,7 +44,11 @@ void AEnemyBaseClass::DecreaseHP(int change)
 	HPPercent = (float)CurrentHP / (float)MaxHP;
 
 	if (CurrentHP <= 0)
+	{
+		WidgetComponent->SetVisibility(false);
+		IsTargeted = false;
 		DeathFunction();
+	}
 }
 
 void AEnemyBaseClass::IncreaseHP(int change)
@@ -53,17 +57,13 @@ void AEnemyBaseClass::IncreaseHP(int change)
 	HPPercent = (float)CurrentHP / (float)MaxHP;
 }
 
-void AEnemyBaseClass::DeathFunction_Implementation()
-{
-}
-
 void AEnemyBaseClass::OnEnemyClicked(UPrimitiveComponent* pComponent, FKey inKey)
 {	
 	WidgetComponent->SetVisibility(true);
 	IsTargeted = true;
 
 	//Make sure all other enemies (That aren't this enemy instance)
-	//Are set an not targeted and their AttackWidgets aren't visible.
+	//Are set as not targeted and their AttackWidgets aren't visible.
 	TArray<AActor*> FoundActors;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AEnemyBaseClass::StaticClass(), FoundActors);
 	
