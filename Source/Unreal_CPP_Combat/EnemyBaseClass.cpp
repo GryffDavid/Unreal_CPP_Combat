@@ -38,7 +38,7 @@ void AEnemyBaseClass::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
 
-void AEnemyBaseClass::DecreaseHP(int change)
+bool AEnemyBaseClass::DecreaseHP(int change)
 {
 	CurrentHP -= change;
 	HPPercent = (float)CurrentHP / (float)MaxHP;
@@ -47,8 +47,10 @@ void AEnemyBaseClass::DecreaseHP(int change)
 	{
 		WidgetComponent->SetVisibility(false);
 		IsTargeted = false;
-		DeathFunction();
+		return true;
 	}
+	
+	return false;
 }
 
 void AEnemyBaseClass::IncreaseHP(int change)

@@ -41,15 +41,12 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = UserInterface)
 	UWidgetComponent* WidgetComponent;
-
-	UFUNCTION(BlueprintImplementableEvent)
-	bool DeathFunction();
-
+	
 	UFUNCTION()
 	void OnEnemyClicked(UPrimitiveComponent* pComponent, FKey inKey);
 
 	UFUNCTION(BlueprintCallable, Category = Combat)
-	void DecreaseHP(int change);
+	bool DecreaseHP(int change);
 
 	UFUNCTION(BlueprintCallable, Category = Combat)
 	void IncreaseHP(int change);
