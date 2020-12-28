@@ -27,6 +27,13 @@ public:
 
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	UPROPERTY(BlueprintReadWrite, Category = Health)
+	int CurrentHealth = 10;
+
+	UPROPERTY(BlueprintReadWrite, Category = Health)
+	int MaxHealth = 10;
+
+
 	#pragma region ATTRIBUTES
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = Skills)
 	int Strength;
