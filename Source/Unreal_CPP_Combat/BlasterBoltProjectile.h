@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "Components/SphereComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
+#include "Components/PointLightComponent.h"
 #include "BlasterBoltProjectile.generated.h"
 
 UCLASS()
@@ -31,7 +32,11 @@ public:
 	UPROPERTY(VisibleAnywhere, Category = Movement)
 	UProjectileMovementComponent* ProjectileMovementComponent;
 
-	void FireInDirection(const FVector& shootDirection);
+	UPROPERTY(EditDefaultsOnly, Category = Light)
+	UPointLightComponent* ProjectileLightComponent;
+
+	UFUNCTION(BlueprintCallable)
+	void ToggleActivePause(bool isPaused);
 
 	UPROPERTY(VisibleDefaultsOnly, Category = Projectile)
 	UStaticMeshComponent* ProjectileMeshComponent;
@@ -39,8 +44,14 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = Material)
 	UMaterialInstanceDynamic* ProjectileMaterialInstance;
 
-	UPROPERTY(EditAnywhere, Category = Projectile)
-	int DamageDone;
+	UPROPERTY(BlueprintReadWrite, Category = Projectile)
+	FVector StartingVelocity;
+
+	UPROPERTY(BlueprintReadWrite, Category = Projectile, meta=(ExposeOnSpawn=true))
+	bool CanHit;
+
+	UPROPERTY(BlueprintReadWrite, Category = Projectile, meta = (ExposeOnSpawn = true))
+	int DamageToDo;
 
 	/*UFUNCTION()
 	void OnHit(UPrimitiveComponent* hitComponent, AActor* otherActor, UPrimitiveComponent* otherComponent, FVector normalImpulse, const FHitResult& hit);*/

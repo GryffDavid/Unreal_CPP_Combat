@@ -129,7 +129,7 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = Movement)
 	float SprintSpeed = 600.0f;
 	#pragma endregion
-
+	
 	UPROPERTY(BlueprintReadWrite, Category = Gameplay)
 	bool CharacterActivePaused = false;
 

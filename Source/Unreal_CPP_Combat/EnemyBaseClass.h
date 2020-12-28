@@ -1,7 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#pragma once
-
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Math/UnrealMathUtility.h"
@@ -52,7 +50,7 @@ public:
 	void IncreaseHP(int change);
 	
 	UPROPERTY(BlueprintReadWrite, Category = Combat)
-	bool IsTargeted = false;
+	bool IsTargeted = false; 
 
 	#pragma region ATTRIBUTES
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = Skills)

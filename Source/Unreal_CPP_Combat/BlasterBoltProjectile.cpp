@@ -35,6 +35,14 @@ ABlasterBoltProjectile::ABlasterBoltProjectile()
 		ProjectileMovementComponent->ProjectileGravityScale = 0.0f;
 	}
 
+	if (!ProjectileLightComponent)
+	{
+		ProjectileLightComponent = CreateDefaultSubobject<UPointLightComponent>(TEXT("ProjectileLightComponent"));
+		ProjectileLightComponent->SetupAttachment(RootComponent);
+		ProjectileLightComponent->AttenuationRadius = 250.0f;
+		ProjectileLightComponent->Intensity = 500.0f;
+	}
+
 	if (!ProjectileMeshComponent)
 	{
 		ProjectileMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ProjectileMeshComponent"));
@@ -59,6 +67,7 @@ ABlasterBoltProjectile::ABlasterBoltProjectile()
 void ABlasterBoltProjectile::BeginPlay()
 {
 	Super::BeginPlay();
+	StartingVelocity = GetActorRotation().Vector() * ProjectileMovementComponent->InitialSpeed;
 	
 }
 
@@ -69,18 +78,18 @@ void ABlasterBoltProjectile::Tick(float DeltaTime)
 
 }
 
-void ABlasterBoltProjectile::FireInDirection(const FVector & shootDirection)
+void ABlasterBoltProjectile::ToggleActivePause(bool isPaused)
 {
-	ProjectileMovementComponent->Velocity = shootDirection * ProjectileMovementComponent->InitialSpeed;
+	if (isPaused)
+	{
+		ProjectileMovementComponent->Velocity = FVector(0);
+		SetLifeSpan(0);
+	}
+	else
+	{
+		ProjectileMovementComponent->Velocity = StartingVelocity;
+		SetLifeSpan(3.5f);
+	}
 }
 
-//void ABlasterBoltProjectile::OnHit(UPrimitiveComponent * hitComponent, AActor * otherActor, UPrimitiveComponent * otherComponent, FVector normalImpulse, const FHitResult & hit)
-//{
-//	if (otherActor != this && otherComponent->IsSimulatingPhysics())
-//	{
-//		//otherComponent->AddImpulseAtLocation(ProjectileMovementComponent->Velocity * 100.0f, hit.ImpactPoint);
-//	}
-//
-//	//Destroy();
-//}
 

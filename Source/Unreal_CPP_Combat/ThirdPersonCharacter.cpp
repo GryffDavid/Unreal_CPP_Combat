@@ -1,6 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "ThirdPersonCharacter.h"
 
 // Sets default values
@@ -77,6 +76,7 @@ void AThirdPersonCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 }
 
 
+
 void AThirdPersonCharacter::MoveForward(float value)
 {
 	if (!DisableMovement)
@@ -114,7 +114,6 @@ void AThirdPersonCharacter::Jump()
 
 	Super::Jump();
 }
-
 
 void AThirdPersonCharacter::StopJumping()
 {
