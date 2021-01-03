@@ -64,6 +64,16 @@ int UDiceRoll::RollD20(int numDice)
 
 bool UDiceRoll::RollD20vDC(int difficultyClass, int diceModifier, int numDice)
 { 
+	//TODO: Going to have to change the automatic hit and fail because this function might be used for other rolls besides combat
+
+	//Automatic hit if the roll is a 20
+	if (RollD20(numDice) == 20)
+		return true;
+
+	//Automatic fail if the roll is a 1
+	if (RollD20(numDice) == 1)
+		return false;
+
 	if (RollD20(numDice) + diceModifier >= difficultyClass)
 		return true;	
 	else	
