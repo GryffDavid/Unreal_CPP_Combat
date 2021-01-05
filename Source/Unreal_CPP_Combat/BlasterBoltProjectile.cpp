@@ -47,7 +47,7 @@ ABlasterBoltProjectile::ABlasterBoltProjectile()
 	{
 		ProjectileMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ProjectileMeshComponent"));
 
-		static ConstructorHelpers::FObjectFinder<UStaticMesh>Mesh(TEXT("'/Game/Meshes/Sphere.Sphere'"));
+		static ConstructorHelpers::FObjectFinder<UStaticMesh>Mesh(TEXT("'/Game/Meshes/M_Sphere.M_Sphere'"));
 
 		if (Mesh.Succeeded())
 		{
