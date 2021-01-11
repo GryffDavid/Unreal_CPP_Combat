@@ -76,7 +76,6 @@ void AThirdPersonCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 }
 
 
-
 void AThirdPersonCharacter::MoveForward(float value)
 {
 	if (!DisableMovement)
@@ -96,31 +95,6 @@ void AThirdPersonCharacter::MoveRight(float value)
 }
 
 
-void AThirdPersonCharacter::Jump()
-{ 
-	float Length;
-	FVector Direction;
-	GetCharacterMovement()->Velocity.ToDirectionAndLength(OUT Direction, OUT Length);
-
-	if (Length > 0.0f)
-	{
-		if (SprintPressed == false)
-			GetCharacterMovement()->JumpZVelocity = 365;
-		else
-			GetCharacterMovement()->JumpZVelocity = 450;
-	}
-	else
-		GetCharacterMovement()->JumpZVelocity = 340;
-
-	Super::Jump();
-}
-
-void AThirdPersonCharacter::StopJumping()
-{
-	Super::StopJumping();
-}
-
-
 void AThirdPersonCharacter::Sprint()
 {
 	SprintPressed = true;
@@ -134,36 +108,3 @@ void AThirdPersonCharacter::StopSprinting()
 	SprintPressed = false;
 	GetCharacterMovement()->MaxWalkSpeed = RunSpeed;
 }
-
-
-void AThirdPersonCharacter::Aim()
-{
-	AimPressed = true;
-
-	if (!CharacterActivePaused)
-	{
-		GetCharacterMovement()->MaxWalkSpeed = AimRunSpeed;
-
-		DesiredSpringLength = AimingCameraDistance;
-		ThirdPersonCamera->AddLocalOffset(FVector(0, YShoulderOffset, 0));		
-	}
-}
-
-void AThirdPersonCharacter::StopAiming()
-{
-	AimPressed = false;
-
-	if (!CharacterActivePaused)
-	{
-		if (SprintPressed == true)
-			GetCharacterMovement()->MaxWalkSpeed = SprintSpeed;
-		else
-			GetCharacterMovement()->MaxWalkSpeed = RunSpeed;
-
-		DesiredSpringLength = DefaultCameraDistance;
-		ThirdPersonCamera->AddLocalOffset(FVector(0, -YShoulderOffset, 0));
-	}
-}
-
-
-

@@ -145,12 +145,7 @@ private:
 
 	bool IsSprinting = false;
 
-	void Jump() override;
-	void StopJumping() override;
-
 	void Sprint();
 	void StopSprinting();
 
-	void Aim();
-	void StopAiming();
 };
