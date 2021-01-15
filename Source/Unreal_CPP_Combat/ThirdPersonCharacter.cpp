@@ -40,6 +40,7 @@ void AThirdPersonCharacter::BeginPlay()
 
 	GetController<APlayerController>()->SetInputMode(FInputModeGameAndUI());
 	GetController<APlayerController>()->bShowMouseCursor = true;
+	GetController<APlayerController>()->SetTickableWhenPaused(true);
 }
 
 // Called every frame
@@ -50,8 +51,9 @@ void AThirdPersonCharacter::Tick(float DeltaTime)
 	//TODO: Should maybe do this camera transition with a timeline in blueprint
 	CurrentSpringLength = FMath::Lerp(CurrentSpringLength, DesiredSpringLength, 0.1f);
 	CameraSpringArmComponent->TargetArmLength = CurrentSpringLength;
-
+	GetController<APlayerController>()->UpdateCameraManager(DeltaTime);
 	bUseControllerRotationYaw = (AimPressed && !CharacterActivePaused);
+	
 }
 
 // Called to bind functionality to input
@@ -61,18 +63,23 @@ void AThirdPersonCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 
 	PlayerInputComponent->BindAxis("MoveForward", this, &AThirdPersonCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &AThirdPersonCharacter::MoveRight);
-
-	PlayerInputComponent->BindAxis("Turn", this, &AThirdPersonCharacter::AddControllerYawInput);
-	PlayerInputComponent->BindAxis("LookUp", this, &AThirdPersonCharacter::AddControllerPitchInput);
+	PlayerInputComponent->BindAxis("Turn", this, &AThirdPersonCharacter::AddControllerYawInput).bExecuteWhenPaused = true;
+	PlayerInputComponent->BindAxis("LookUp", this, &AThirdPersonCharacter::AddControllerPitchInput).bExecuteWhenPaused = true;
+	PlayerInputComponent->SetTickableWhenPaused(true);
+	
+	//PlayerInputComponent->AxisBindings[0].bExecuteWhenPaused = true;
+	//PlayerInputComponent->AxisBindings[1].bExecuteWhenPaused = true;
+	//PlayerInputComponent->AxisBindings[2].bExecuteWhenPaused = true;
+	//PlayerInputComponent->AxisBindings[3].bExecuteWhenPaused = true;
+	
+	//CameraSpringArmComponent->SetTickableWhenPaused(true);
+	//CameraSpringArmComponent->SetTickableWhenPaused(true);
 
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AThirdPersonCharacter::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &AThirdPersonCharacter::StopJumping);
 
 	PlayerInputComponent->BindAction("Sprint", IE_Pressed, this, &AThirdPersonCharacter::Sprint);
 	PlayerInputComponent->BindAction("Sprint", IE_Released, this, &AThirdPersonCharacter::StopSprinting);
-
-	PlayerInputComponent->BindAction("AimDownSights", IE_Pressed, this, &AThirdPersonCharacter::Aim);
-	PlayerInputComponent->BindAction("AimDownSights", IE_Released, this, &AThirdPersonCharacter::StopAiming);
 }
 
 
@@ -87,7 +94,7 @@ void AThirdPersonCharacter::MoveForward(float value)
 
 void AThirdPersonCharacter::MoveRight(float value)
 {
-	if (!DisableMovement && SprintPressed == false)
+	if (!DisableMovement)
 	{
 		FVector Direction = FRotationMatrix(FRotator(0, Controller->GetControlRotation().Yaw, 0)).GetScaledAxis(EAxis::Y);
 		AddMovementInput(Direction, value);

@@ -81,10 +81,10 @@ public:
 	#pragma endregion
 
 	#pragma region CAMERA PROPERTIES
-	UPROPERTY(BlueprintReadOnly, Category = Camera)
+	UPROPERTY(EditAnywhere, Category = Camera)
 	USpringArmComponent* CameraSpringArmComponent;
 
-	UPROPERTY(BlueprintReadOnly, Category = Camera)
+	UPROPERTY(EditAnywhere, Category = Camera)
 	UCameraComponent* ThirdPersonCamera;
 
 	UPROPERTY(BlueprintReadWrite, Category = Camera)
