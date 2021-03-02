@@ -32,8 +32,7 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, Category = Health)
 	int MaxHealth = 10;
-
-
+	
 	#pragma region ATTRIBUTES
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = Skills)
 	int Strength;

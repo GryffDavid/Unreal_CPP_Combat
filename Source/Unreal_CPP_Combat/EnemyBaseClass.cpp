@@ -43,6 +43,8 @@ bool AEnemyBaseClass::DecreaseHP(int change)
 	CurrentHP -= change;
 	HPPercent = (float)CurrentHP / (float)MaxHP;
 
+	//If the enemy is below 0 HP after the change,
+	//this function returns true. Meaning dead.
 	if (CurrentHP <= 0)
 	{
 		WidgetComponent->SetVisibility(false);
