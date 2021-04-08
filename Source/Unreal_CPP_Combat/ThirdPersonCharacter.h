@@ -83,7 +83,7 @@ public:
 	UPROPERTY(EditAnywhere, Category = Camera)
 	USpringArmComponent* CameraSpringArmComponent;
 
-	UPROPERTY(EditAnywhere, Category = Camera)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Camera)
 	UCameraComponent* ThirdPersonCamera;
 
 	UPROPERTY(BlueprintReadWrite, Category = Camera)
