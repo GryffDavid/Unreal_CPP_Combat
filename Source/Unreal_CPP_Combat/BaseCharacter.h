@@ -41,8 +41,23 @@ public:
 	UPROPERTY(BlueprintReadWrite, Category = Health)
 	int MaxHealth = 10;
 
+
+	#pragma region MOVEMENT BOOLEANS
 	UPROPERTY(BlueprintReadWrite, Category = Movement)
 	bool DisableMovement;
+
+	UPROPERTY(BlueprintReadWrite, Category = Movement)
+	bool SprintPressed;
+
+	UPROPERTY(BlueprintReadWrite, Category = Movement)
+	bool CrouchPressed;
+
+	UPROPERTY(BlueprintReadWrite, Category = Movement)
+	bool JumpPressed;
+
+	UPROPERTY(BlueprintReadWrite, Category = Shooting)
+	bool AimPressed;
+	#pragma endregion
 
 	#pragma region ATTRIBUTES
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = Skills)
