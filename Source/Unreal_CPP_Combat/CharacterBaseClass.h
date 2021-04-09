@@ -4,35 +4,34 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "GameFramework/CharacterMovementComponent.h"
-#include "GameFramework/SpringArmComponent.h"
-#include "Camera/CameraComponent.h"
-#include "Math/UnrealMathUtility.h"
-#include "DiceRoll.h"
-#include "EnemyBaseClass.h"
-#include "ThirdPersonCharacter.generated.h"
+#include "CharacterBaseClass.generated.h"
 
 UCLASS()
-class UNREAL_CPP_COMBAT_API AThirdPersonCharacter : public ACharacter
+class UNREAL_CPP_COMBAT_API ACharacterBaseClass : public ACharacter
 {
 	GENERATED_BODY()
 
+public:
+	// Sets default values for this character's properties
+	ACharacterBaseClass();
+
 protected:
+	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:
-	AThirdPersonCharacter();
-
+public:	
+	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-	
+
 	UPROPERTY(BlueprintReadWrite, Category = Health)
 	int CurrentHealth = 10;
 
 	UPROPERTY(BlueprintReadWrite, Category = Health)
 	int MaxHealth = 10;
-	
+
 	#pragma region ATTRIBUTES
 	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = Skills)
 	int Strength;
@@ -80,14 +79,12 @@ public:
 	#pragma endregion
 
 
-
 	#pragma region MOVEMENT FUNCTIONS
-
 	UFUNCTION()
 	void MoveForward(float value);
 
 	UFUNCTION()
-	void MoveRight(float value);	
+	void MoveRight(float value);
 	#pragma endregion
 
 	#pragma region MOVEMENT BOOLEANS
@@ -117,36 +114,4 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = Movement)
 	float SprintSpeed = 600.0f;
 	#pragma endregion
-	
-	UPROPERTY(BlueprintReadWrite, Category = Gameplay)
-	bool CharacterActivePaused = false;
-
-#pragma region CAMERA PROPERTIES
-	UPROPERTY(EditAnywhere, Category = Camera)
-		USpringArmComponent* CameraSpringArmComponent;
-
-	UPROPERTY(EditAnywhere, Category = Camera)
-		UCameraComponent* ThirdPersonCamera;
-
-	UPROPERTY(BlueprintReadWrite, Category = Camera)
-		float DesiredSpringLength = DefaultCameraDistance;
-
-	UPROPERTY(BlueprintReadWrite, Category = Camera)
-		float DefaultCameraDistance = 300.0f;
-
-	UPROPERTY(BlueprintReadWrite, Category = Camera)
-		float AimingCameraDistance = 100.0f;
-
-	UPROPERTY(EditDefaultsOnly, Category = Camera)
-		float YShoulderOffset = 50.0f;
-#pragma endregion
-
-private:
-	float CurrentSpringLength = DefaultCameraDistance;
-
-	bool IsSprinting = false;
-
-	void Sprint();
-	void StopSprinting();
-
 };
