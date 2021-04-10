@@ -55,8 +55,11 @@ void ACharacterBaseClass::MoveForward(float value)
 {
 	if (!DisableMovement)
 	{
-		FVector Direction = FRotationMatrix(FRotator(0, Controller->GetControlRotation().Yaw, 0)).GetScaledAxis(EAxis::X);
-		AddMovementInput(Direction, value);
+		if (Controller != nullptr)
+		{
+			FVector Direction = FRotationMatrix(FRotator(0, Controller->GetControlRotation().Yaw, 0)).GetScaledAxis(EAxis::X);
+			AddMovementInput(Direction, value);
+		}
 	}
 }
 
@@ -64,8 +67,11 @@ void ACharacterBaseClass::MoveRight(float value)
 {
 	if (!DisableMovement)
 	{
+		if (Controller != nullptr)
+		{
 		FVector Direction = FRotationMatrix(FRotator(0, Controller->GetControlRotation().Yaw, 0)).GetScaledAxis(EAxis::Y);
 		AddMovementInput(Direction, value);
+		}
 	}
 }
 
