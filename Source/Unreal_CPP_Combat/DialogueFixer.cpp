@@ -7,6 +7,6 @@
 FString UDialogueFixer::FixDialogue(FString dialogue)
 {
 	FString dest = "\n";
-	TArray<TCHAR>& chars = dest.GetCharArray();	
+	TArray<TCHAR>&chars = dest.GetCharArray();	
 	return dialogue.ReplaceCharWithEscapedChar(&chars);
 }

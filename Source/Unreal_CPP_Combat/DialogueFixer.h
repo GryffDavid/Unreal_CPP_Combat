@@ -15,7 +15,6 @@ class UNREAL_CPP_COMBAT_API UDialogueFixer : public UBlueprintFunctionLibrary
 	GENERATED_BODY()
 
 	public:
-		UFUNCTION(BlueprintCallable, Category = Dice)
-		FString FixDialogue(FString dialogue);
-	
+		UFUNCTION(BlueprintCallable, Category = Dialogue)
+		static FString FixDialogue(FString dialogue);		
 };
