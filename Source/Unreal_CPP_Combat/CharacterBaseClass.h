@@ -33,48 +33,48 @@ public:
 	int MaxHealth = 10;
 
 	#pragma region ATTRIBUTES
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = Skills)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Skills)
 	int Strength;
 
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = Skills)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Skills)
 	int Dexterity;
 
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = Skills)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Skills)
 	int Constitution;
 
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = Skills)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Skills)
 	int Intelligence;
 
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = Skills)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Skills)
 	int Wisdom;
 
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = Skills)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Skills)
 	int Charisma;
 	#pragma endregion
 
 	#pragma region SKILLS
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = Skills)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Skills)
 	int ComputerUse;
 
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = Skills)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Skills)
 	int Demolitions;
 
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = Skills)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Skills)
 	int Stealth;
 
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = Skills)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Skills)
 	int Awareness;
 
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = Skills)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Skills)
 	int Persuade;
 
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = Skills)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Skills)
 	int Repair;
 
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = Skills)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Skills)
 	int Security;
 
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere, Category = Skills)
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = Skills)
 	int TreatInjury;
 	#pragma endregion
 
