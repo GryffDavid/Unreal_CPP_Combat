@@ -15,5 +15,11 @@
 				"UMG"
 			]
 		}
+	],
+	"Plugins": [
+		{
+			"Name": "UnrealInk",
+			"Enabled": true
+		}
 	]
 }
